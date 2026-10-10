@@ -5,13 +5,18 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.subsystems.Classifier;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 import org.firstinspires.ftc.teamcode.subsystems.ExampleSubsystem;
-
+import org.firstinspires.ftc.teamcode.subsystems.Classifier.Balltype;
 @TeleOp
 public class DrivingSample extends LinearOpMode {
 
     static final boolean FIELD_CENTRIC = false;
+
+    Balltype balltype;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -19,8 +24,18 @@ public class DrivingSample extends LinearOpMode {
         Robot robot = new Robot(hardwareMap, telemetry);
         ExampleSubsystem exampleSubsystem = new ExampleSubsystem(robot);
 
+        Classifier classifier = new Classifier(robot);
+
+        Intake intake = new Intake(robot);
+
+        intake.setDefaultCommand(intake.intakeOff());
+
         // the extended gamepad object
         GamepadEx driverOp = new GamepadEx(gamepad1);
+
+
+        driverOp.getGamepadButton(GamepadKeys.Button.X)
+                .whenActive(intake.intakeOn());
 
         driverOp.getGamepadButton(GamepadKeys.Button.A)
                 .and(driverOp.getGamepadButton(GamepadKeys.Button.B).negate())
@@ -36,12 +51,16 @@ public class DrivingSample extends LinearOpMode {
 
             CommandScheduler.getInstance().run();
 
+            balltype = classifier.id();
+
             robot.drive.arcadeDrive(
                     driverOp.getLeftY(),
                     driverOp.getLeftX(),
                     false
             );
 
+            telemetry.addData("balltype",balltype);
+            telemetry.update();
             //   if (!FIELD_CENTRIC) {
             //       // optional fourth parameter for squared inputs
             //       robot.drive.driveRobotCentric(
