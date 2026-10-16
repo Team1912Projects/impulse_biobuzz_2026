@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.Classifier;
+import org.firstinspires.ftc.teamcode.subsystems.Detector;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 import org.firstinspires.ftc.teamcode.subsystems.ExampleSubsystem;
@@ -17,15 +18,18 @@ public class DrivingSample extends LinearOpMode {
     static final boolean FIELD_CENTRIC = false;
 
     Balltype balltype;
+    Robot.AllianceColor alliance;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         Robot robot = new Robot(hardwareMap, telemetry);
+        robot.setAlliance(Robot.AllianceColor.BLUE);
 
         ExampleSubsystem exampleSubsystem = new ExampleSubsystem(robot);
         Classifier classifier = new Classifier(robot);
         Intake intake = new Intake(robot);
+        Detector detector = new Detector(robot);
 
         // the extended gamepad object
         GamepadEx driverOp = new GamepadEx(gamepad1);
@@ -40,11 +44,18 @@ public class DrivingSample extends LinearOpMode {
                 .whenActive(exampleSubsystem.moveUp());
                 // .whenActive(new InstantCommand(() -> exampleSubsystem.doMoveUp()));
 
+        while (opModeIsActive() || opModeInInit()) {
+            detector.runDetector();
+            telemetry.update();
+        }
+
         waitForStart();
 
         while (!isStopRequested()) {
 
             CommandScheduler.getInstance().run();
+
+            detector.runDetector();
 
             balltype = classifier.id();
 

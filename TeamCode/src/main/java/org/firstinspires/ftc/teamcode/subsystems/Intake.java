@@ -18,11 +18,11 @@ public class Intake implements Subsystem {
   }
 
   public void runIntake() {
-    robot.intakeMotor.setPower(.5);
+    robot.intakeMotor.set(.5);
   }
 
   public void stop() {
-    robot.intakeMotor.setPower(0);
+    robot.intakeMotor.set(0);
   }
 
   public Command intakeOn() {
