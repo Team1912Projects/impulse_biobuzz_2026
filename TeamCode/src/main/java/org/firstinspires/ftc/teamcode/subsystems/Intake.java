@@ -10,8 +10,8 @@ public class Intake implements Subsystem {
 
   public Intake(Robot robot) {
       this.robot = robot;
+      this.setDefaultCommand(this.intakeOff());
   }
-
 
   @Override
   public void periodic() {
@@ -32,4 +32,4 @@ public class Intake implements Subsystem {
   public Command intakeOff() {
     return new InstantCommand(this::stop);
   }
-    }
+}

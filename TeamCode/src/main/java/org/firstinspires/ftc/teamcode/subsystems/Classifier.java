@@ -11,7 +11,6 @@ public class Classifier implements Subsystem {
         POLLEN,
         BLUENECTAR,
         REDNECTAR,
-
         UNKNOWN
     }
 
@@ -21,6 +20,10 @@ public class Classifier implements Subsystem {
         this.robot = robot;
     }
 
+    @Override
+    public void periodic() {
+        this.id();
+    }
     public Balltype id() {
         final float[] hsvValues = new float[3];
         NormalizedRGBA colors = robot.colorSensor.getNormalizedColors();

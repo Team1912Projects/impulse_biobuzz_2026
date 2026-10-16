@@ -22,21 +22,16 @@ public class DrivingSample extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         Robot robot = new Robot(hardwareMap, telemetry);
+
         ExampleSubsystem exampleSubsystem = new ExampleSubsystem(robot);
-
         Classifier classifier = new Classifier(robot);
-
         Intake intake = new Intake(robot);
-
-        intake.setDefaultCommand(intake.intakeOff());
 
         // the extended gamepad object
         GamepadEx driverOp = new GamepadEx(gamepad1);
 
-
         driverOp.getGamepadButton(GamepadKeys.Button.X)
                 .whenActive(intake.intakeOn());
-
         driverOp.getGamepadButton(GamepadKeys.Button.A)
                 .and(driverOp.getGamepadButton(GamepadKeys.Button.B).negate())
                 .whenActive(exampleSubsystem.moveDown());
