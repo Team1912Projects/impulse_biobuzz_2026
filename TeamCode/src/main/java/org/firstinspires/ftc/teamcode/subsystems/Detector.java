@@ -13,6 +13,8 @@ import org.firstinspires.ftc.vision.opencv.Circle;
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorRange;
 import org.firstinspires.ftc.vision.opencv.ImageRegion;
+import org.firstinspires.ftc.teamcode.subsystems.Robot;
+
 
 import java.util.List;
 
@@ -153,6 +155,7 @@ public class Detector implements Subsystem {
                 .setCamera(robot.webcamName);
         pBuilder.addProcessor(nectarLocator);
         portal = pBuilder.build();
+
 
     }
 

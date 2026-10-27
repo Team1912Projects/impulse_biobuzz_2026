@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import android.graphics.Color;
 import android.util.Size;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -22,6 +23,7 @@ import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.hardware.RevIMU;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
+
 
 public class Robot {
     public enum AllianceColor {
@@ -43,6 +45,7 @@ public class Robot {
     public AllianceColor alliance;
     public Motor motor1;
     public Motor motor2;
+    public  Limelight3A limelight;
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
@@ -57,6 +60,7 @@ public class Robot {
         motor2 = new Motor(hardwareMap,"motor2");
 
         webcamName = hardwareMap.get(WebcamName.class, "webcam");
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
 
         //Motor motor,motor1;
