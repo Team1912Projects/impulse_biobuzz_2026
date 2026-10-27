@@ -130,7 +130,7 @@ public class Detector implements Subsystem {
 
         ColorBlobLocatorProcessor.Builder cBuilder = new ColorBlobLocatorProcessor.Builder()
                 .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY)
-                //.setRoi(ImageRegion.asUnityCenterCoordinates(-0.75, 0.75, 0.75, -0.75))
+                .setRoi(ImageRegion.asUnityCenterCoordinates(-0.75, 0.75, 0.75, -0.75))
                 .setDrawContours(true)   // Show contours on the Stream Preview
                 .setBoxFitColor(0)       // Disable the drawing of rectangles
                 .setCircleFitColor(Color.rgb(255, 255, 0)) // Draw a circle
@@ -198,11 +198,11 @@ public class Detector implements Subsystem {
          */
         ColorBlobLocatorProcessor.Util.filterByCriteria(
                 ColorBlobLocatorProcessor.BlobCriteria.BY_CONTOUR_AREA,
-                50, 20000, pollenBlobs);  // filter out very small blobs.
+                8500, 13500, pollenBlobs);  // filter out very small blobs.
 
         ColorBlobLocatorProcessor.Util.filterByCriteria(
                 ColorBlobLocatorProcessor.BlobCriteria.BY_CIRCULARITY,
-                0.6, 1, pollenBlobs);     /* filter out non-circular blobs.
+                0.7, 1, pollenBlobs);     /* filter out non-circular blobs.
          * NOTE: You may want to adjust the minimum value depending on your use case.
          * Circularity values will be affected by shadows, and will therefore vary based
          * on the location of the camera on your robot and venue lighting. It is strongly
@@ -232,7 +232,7 @@ public class Detector implements Subsystem {
 
         ColorBlobLocatorProcessor.Util.filterByCriteria(
                 ColorBlobLocatorProcessor.BlobCriteria.BY_CONTOUR_AREA,
-                50, 20000, nectarBlobs);  // filter out very small blobs.
+                10000, 14500, nectarBlobs);  // filter out very small blobs.
 
         ColorBlobLocatorProcessor.Util.filterByCriteria(
                 ColorBlobLocatorProcessor.BlobCriteria.BY_CIRCULARITY,

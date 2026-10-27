@@ -18,6 +18,7 @@ import org.firstinspires.ftc.vision.opencv.ImageRegion;
 // import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.seattlesolvers.solverslib.drivebase.DifferentialDrive;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.hardware.RevIMU;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
@@ -32,36 +33,39 @@ public class Robot {
     public ServoEx exampleServo;
     public DifferentialDrive drive;
     //public MecanumDrive drive;
-    public RevIMU imu;
+    //public RevIMU imu;
 
     public RevColorSensorV3 colorSensor;
     public Motor intakeMotor;
     public WebcamName webcamName;
+    public MecanumDrive mecanumDrive;
 
     public AllianceColor alliance;
+    public Motor motor1;
+    public Motor motor2;
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
         this.alliance = alliance;
 
-        exampleServo = new ServoEx(hardwareMap, "servo_name");
+        //exampleServo = new ServoEx(hardwareMap, "servo_name");
 
-        colorSensor = hardwareMap.get(RevColorSensorV3.class, "color_sensor");
+        //colorSensor = hardwareMap.get(RevColorSensorV3.class, "color_sensor");
 
-        intakeMotor = new Motor(hardwareMap, "intake");
+        //intakeMotor = new Motor(hardwareMap, "intake");
+        motor1 = new Motor(hardwareMap,"motor1");
+        motor2 = new Motor(hardwareMap,"motor2");
 
-        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        webcamName = hardwareMap.get(WebcamName.class, "webcam");
 
-        Motor fl, fr, bl, br;
-        fl = new Motor(hardwareMap, "frontLeft");
-        fr = new Motor(hardwareMap, "frontRight");
-        // bl = new Motor(hardwareMap, "backLeft", Motor.GoBILDA.RPM_435);
-        // br = new Motor(hardwareMap, "backRight", Motor.GoBILDA.RPM_435);
-        // drive = new MecanumDrive(fl, fr, bl, br);
-        drive = new DifferentialDrive(fl, fr);
 
-        RevIMU imu = new RevIMU(hardwareMap);
-        imu.init();
+        //Motor motor,motor1;
+        //motor = new Motor(hardwareMap, "motor1");
+        //motor1 = new Motor(hardwareMap, "motor2");
+
+
+        //RevIMU imu = new RevIMU(hardwareMap);
+        //imu.init();
 
         this.alliance = AllianceColor.UNKNOWN;
     }
